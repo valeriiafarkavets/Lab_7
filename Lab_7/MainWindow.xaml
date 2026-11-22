@@ -1,0 +1,183 @@
+﻿<Window x:Class="Lab_7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Lab 7 - Date Parser"
+        Height="620" Width="1100"
+        MinHeight="550" MinWidth="900"
+        WindowStartupLocation="CenterScreen"
+        Background="#101F28">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,20">
+            <TextBlock Text="DATE PARSER"
+                       FontSize="27"
+                       FontWeight="Bold"
+                       Foreground="#2DD4BF"/>
+
+            <TextBlock Text="Лабораторна робота №7 | Регулярні вирази"
+                       FontSize="14"
+                       Foreground="#B7C9CE"
+                       Margin="0,5,0,0"/>
+        </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="340"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.Column="0"
+                    Background="#19343E"
+                    CornerRadius="8"
+                    Padding="15">
+
+                <DockPanel LastChildFill="True">
+
+                    <StackPanel DockPanel.Dock="Top">
+                        <TextBlock Text="Введення тексту"
+                                   Foreground="White"
+                                   FontSize="18"
+                                   FontWeight="SemiBold"/>
+
+                        <TextBlock Text="Введіть рядки з датами англійською мовою"
+                                   Foreground="#B7C9CE"
+                                   FontSize="12"
+                                   Margin="0,5,0,12"/>
+                    </StackPanel>
+
+                    <StackPanel DockPanel.Dock="Bottom"
+                                Margin="0,12,0,0">
+
+                        <Button x:Name="AnalyzeButton"
+                                Content="АНАЛІЗУВАТИ"
+                                Height="40"
+                                Background="#2DD4BF"
+                                Foreground="#101F28"
+                                FontWeight="Bold"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="AnalyzeButton_Click"/>
+
+                        <Button x:Name="ClearButton"
+                                Content="ОЧИСТИТИ"
+                                Height="38"
+                                Margin="0,10,0,0"
+                                Background="#31515C"
+                                Foreground="White"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="ClearButton_Click"/>
+                    </StackPanel>
+
+                    <TextBox x:Name="InputTextBox"
+                             AcceptsReturn="True"
+                             TextWrapping="Wrap"
+                             VerticalScrollBarVisibility="Auto"
+                             Background="#102731"
+                             Foreground="White"
+                             BorderBrush="#45636D"
+                             Padding="10"
+                             FontSize="14"/>
+                </DockPanel>
+            </Border>
+
+            <Border Grid.Column="2"
+                    Background="#19343E"
+                    CornerRadius="8"
+                    Padding="15">
+
+                <DockPanel>
+                    <TextBlock DockPanel.Dock="Top"
+                               Text="Результати розпізнавання"
+                               Foreground="White"
+                               FontSize="18"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,12"/>
+
+                    <DataGrid x:Name="ResultsGrid"
+                              AutoGenerateColumns="False"
+                              IsReadOnly="True"
+                              CanUserAddRows="False"
+                              HeadersVisibility="Column"
+                              GridLinesVisibility="Horizontal"
+                              Background="#102731"
+                              Foreground="#101F28"
+                              RowBackground="#DCEBED"
+                              AlternatingRowBackground="#C7E0E3"
+                              BorderThickness="0"
+                              ColumnHeaderHeight="36"
+                              RowHeight="35">
+
+                        <DataGrid.ColumnHeaderStyle>
+                            <Style TargetType="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#2DD4BF"/>
+                                <Setter Property="Foreground" Value="#101F28"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="Padding" Value="8"/>
+                            </Style>
+                        </DataGrid.ColumnHeaderStyle>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="№"
+                                                Binding="{Binding Number}"
+                                                Width="40"/>
+
+                            <DataGridTextColumn Header="Вхідний рядок"
+                                                Binding="{Binding OriginalText}"
+                                                Width="*"/>
+
+                            <DataGridTextColumn Header="День"
+                                                Binding="{Binding Day}"
+                                                Width="55"/>
+
+                            <DataGridTextColumn Header="Місяць"
+                                                Binding="{Binding Month}"
+                                                Width="65"/>
+
+                            <DataGridTextColumn Header="Дата"
+                                                Binding="{Binding NormalizedDate}"
+                                                Width="75"/>
+
+                            <DataGridTextColumn Header="Статус"
+                                                Binding="{Binding Status}"
+                                                Width="110"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </DockPanel>
+            </Border>
+        </Grid>
+
+        <Border Grid.Row="2"
+                Background="#19343E"
+                CornerRadius="6"
+                Padding="12"
+                Margin="0,15,0,0">
+
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Усього рядків: "
+                           Foreground="#B7C9CE"/>
+
+                <TextBlock x:Name="TotalText"
+                           Text="0"
+                           Foreground="White"
+                           FontWeight="Bold"
+                           Margin="0,0,30,0"/>
+
+                <TextBlock Text="Розпізнано: "
+                           Foreground="#B7C9CE"/>
+
+                <TextBlock x:Name="RecognizedText"
+                           Text="0"
+                           Foreground="#2DD4BF"
+                           FontWeight="Bold"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</Window>
